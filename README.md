@@ -28,8 +28,9 @@ Vincento Pizza allows users to:
 - **Tailwind CSS (+ tailwind-merge, clsx)**
 - **Radix UI components (Checkbox, Dialog, Popover, Dropdown Menu)**
 - **Lucide Icons**
-- **react-toastify for notifications**
+- **React-toastify for notifications**
 - **React Use utilities**
+--**Zustand for local state management**
 
 ### Backend:
 - **PostgreSQL (Neon) with Prisma ORM**
