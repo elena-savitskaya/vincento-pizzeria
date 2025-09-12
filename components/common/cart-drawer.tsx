@@ -123,7 +123,7 @@ export const CartDrawer = ({ children }: CartDrawerProps) => {
                     type="submit"
                     size="lg"
                   >
-                    <Link href="/checkout">
+                    <Link href="/">
                       Оформити замовлення
                       <ArrowRight size={6} />
                     </Link>

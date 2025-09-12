@@ -16,7 +16,7 @@ export default async function Home({
 }: {
   searchParams: Promise<GetSearchParams>;
 }) {
-  const sp = await searchParams; 
+  const sp = await searchParams;
   const categories = await findPizzas(sp);
 
   return (
@@ -47,10 +47,6 @@ export default async function Home({
                   items={category.products}
                 />
               ))}
-            </div>
-            <div className="flex items-center gap-6 p-2">
-              <Pagination pageCount={3} />
-              <span className="text-md text-gray-400">5 из 65</span>
             </div>
           </div>
         </section>
