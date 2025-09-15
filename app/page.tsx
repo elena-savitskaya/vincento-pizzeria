@@ -3,7 +3,6 @@ import {
   Container,
   Filters,
   FiltersDrawer,
-  Pagination,
   ProductsGroupList,
   Title,
   TopBar,
