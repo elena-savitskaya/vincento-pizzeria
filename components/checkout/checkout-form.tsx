@@ -278,7 +278,24 @@ export const CheckoutForm = () => {
       }
 
       const data = await response.json();
+
+      // Clear cart on backend
+      await fetch("/api/cart", { method: "DELETE" }).catch(() => {});
+
       clearCart();
+      setFormData({
+        name: "",
+        email: "",
+        phone: "+38",
+        deliveryType: "delivery",
+        address: "",
+        city: "",
+        postalCode: "",
+        deliveryTime: "asap",
+        deliveryHour: "",
+        paymentMethod: "google-pay",
+      });
+      setErrors({});
       setSuccessOrderId(data.orderId);
       toastSuccess("Замовлення успішно оформлено!");
     } catch (error) {

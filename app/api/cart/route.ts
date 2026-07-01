@@ -104,3 +104,37 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const token = req.cookies.get("cartToken")?.value;
+
+    if (!token) {
+      return NextResponse.json({ message: "Кошик не знайдено" }, { status: 404 });
+    }
+
+    // Delete all cart items first
+    await prisma.cartItem.deleteMany({
+      where: {
+        cart: {
+          token,
+        },
+      },
+    });
+
+    // Delete the cart
+    await prisma.cart.deleteMany({
+      where: {
+        token,
+      },
+    });
+
+    return NextResponse.json({ message: "Кошик успішно очищено" });
+  } catch (error) {
+    console.log("[CART_DELETE] Server error", error);
+    return NextResponse.json(
+      { message: "Не вдалося очистити кошик" },
+      { status: 500 }
+    );
+  }
+}
