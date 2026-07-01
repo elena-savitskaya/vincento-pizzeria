@@ -10200,6 +10200,12 @@ export namespace Prisma {
     phone: string | null
     address: string | null
     comment: string | null
+    deliveryType: string | null
+    city: string | null
+    postalCode: string | null
+    deliveryTime: string | null
+    deliveryHour: string | null
+    paymentMethod: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10216,6 +10222,12 @@ export namespace Prisma {
     phone: string | null
     address: string | null
     comment: string | null
+    deliveryType: string | null
+    city: string | null
+    postalCode: string | null
+    deliveryTime: string | null
+    deliveryHour: string | null
+    paymentMethod: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10233,6 +10245,12 @@ export namespace Prisma {
     phone: number
     address: number
     comment: number
+    deliveryType: number
+    city: number
+    postalCode: number
+    deliveryTime: number
+    deliveryHour: number
+    paymentMethod: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10263,6 +10281,12 @@ export namespace Prisma {
     phone?: true
     address?: true
     comment?: true
+    deliveryType?: true
+    city?: true
+    postalCode?: true
+    deliveryTime?: true
+    deliveryHour?: true
+    paymentMethod?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10279,6 +10303,12 @@ export namespace Prisma {
     phone?: true
     address?: true
     comment?: true
+    deliveryType?: true
+    city?: true
+    postalCode?: true
+    deliveryTime?: true
+    deliveryHour?: true
+    paymentMethod?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10296,6 +10326,12 @@ export namespace Prisma {
     phone?: true
     address?: true
     comment?: true
+    deliveryType?: true
+    city?: true
+    postalCode?: true
+    deliveryTime?: true
+    deliveryHour?: true
+    paymentMethod?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10398,8 +10434,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address: string | null
     comment: string | null
+    deliveryType: string
+    city: string | null
+    postalCode: string | null
+    deliveryTime: string
+    deliveryHour: string | null
+    paymentMethod: string
     createdAt: Date
     updatedAt: Date
     _count: OrderCountAggregateOutputType | null
@@ -10436,6 +10478,12 @@ export namespace Prisma {
     phone?: boolean
     address?: boolean
     comment?: boolean
+    deliveryType?: boolean
+    city?: boolean
+    postalCode?: boolean
+    deliveryTime?: boolean
+    deliveryHour?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Order$userArgs<ExtArgs>
@@ -10454,6 +10502,12 @@ export namespace Prisma {
     phone?: boolean
     address?: boolean
     comment?: boolean
+    deliveryType?: boolean
+    city?: boolean
+    postalCode?: boolean
+    deliveryTime?: boolean
+    deliveryHour?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Order$userArgs<ExtArgs>
@@ -10472,6 +10526,12 @@ export namespace Prisma {
     phone?: boolean
     address?: boolean
     comment?: boolean
+    deliveryType?: boolean
+    city?: boolean
+    postalCode?: boolean
+    deliveryTime?: boolean
+    deliveryHour?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | Order$userArgs<ExtArgs>
@@ -10490,11 +10550,17 @@ export namespace Prisma {
     phone?: boolean
     address?: boolean
     comment?: boolean
+    deliveryType?: boolean
+    city?: boolean
+    postalCode?: boolean
+    deliveryTime?: boolean
+    deliveryHour?: boolean
+    paymentMethod?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "totalAmount" | "status" | "paymentId" | "items" | "fullName" | "email" | "phone" | "address" | "comment" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token" | "totalAmount" | "status" | "paymentId" | "items" | "fullName" | "email" | "phone" | "address" | "comment" | "deliveryType" | "city" | "postalCode" | "deliveryTime" | "deliveryHour" | "paymentMethod" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Order$userArgs<ExtArgs>
   }
@@ -10521,8 +10587,14 @@ export namespace Prisma {
       fullName: string
       email: string
       phone: string
-      address: string
+      address: string | null
       comment: string | null
+      deliveryType: string
+      city: string | null
+      postalCode: string | null
+      deliveryTime: string
+      deliveryHour: string | null
+      paymentMethod: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["order"]>
@@ -10961,6 +11033,12 @@ export namespace Prisma {
     readonly phone: FieldRef<"Order", 'String'>
     readonly address: FieldRef<"Order", 'String'>
     readonly comment: FieldRef<"Order", 'String'>
+    readonly deliveryType: FieldRef<"Order", 'String'>
+    readonly city: FieldRef<"Order", 'String'>
+    readonly postalCode: FieldRef<"Order", 'String'>
+    readonly deliveryTime: FieldRef<"Order", 'String'>
+    readonly deliveryHour: FieldRef<"Order", 'String'>
+    readonly paymentMethod: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
   }
@@ -14753,6 +14831,12 @@ export namespace Prisma {
     phone: 'phone',
     address: 'address',
     comment: 'comment',
+    deliveryType: 'deliveryType',
+    city: 'city',
+    postalCode: 'postalCode',
+    deliveryTime: 'deliveryTime',
+    deliveryHour: 'deliveryHour',
+    paymentMethod: 'paymentMethod',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -15427,8 +15511,14 @@ export namespace Prisma {
     fullName?: StringFilter<"Order"> | string
     email?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
-    address?: StringFilter<"Order"> | string
+    address?: StringNullableFilter<"Order"> | string | null
     comment?: StringNullableFilter<"Order"> | string | null
+    deliveryType?: StringFilter<"Order"> | string
+    city?: StringNullableFilter<"Order"> | string | null
+    postalCode?: StringNullableFilter<"Order"> | string | null
+    deliveryTime?: StringFilter<"Order"> | string
+    deliveryHour?: StringNullableFilter<"Order"> | string | null
+    paymentMethod?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -15445,8 +15535,14 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
-    address?: SortOrder
+    address?: SortOrderInput | SortOrder
     comment?: SortOrderInput | SortOrder
+    deliveryType?: SortOrder
+    city?: SortOrderInput | SortOrder
+    postalCode?: SortOrderInput | SortOrder
+    deliveryTime?: SortOrder
+    deliveryHour?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -15466,8 +15562,14 @@ export namespace Prisma {
     fullName?: StringFilter<"Order"> | string
     email?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
-    address?: StringFilter<"Order"> | string
+    address?: StringNullableFilter<"Order"> | string | null
     comment?: StringNullableFilter<"Order"> | string | null
+    deliveryType?: StringFilter<"Order"> | string
+    city?: StringNullableFilter<"Order"> | string | null
+    postalCode?: StringNullableFilter<"Order"> | string | null
+    deliveryTime?: StringFilter<"Order"> | string
+    deliveryHour?: StringNullableFilter<"Order"> | string | null
+    paymentMethod?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -15484,8 +15586,14 @@ export namespace Prisma {
     fullName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
-    address?: SortOrder
+    address?: SortOrderInput | SortOrder
     comment?: SortOrderInput | SortOrder
+    deliveryType?: SortOrder
+    city?: SortOrderInput | SortOrder
+    postalCode?: SortOrderInput | SortOrder
+    deliveryTime?: SortOrder
+    deliveryHour?: SortOrderInput | SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
@@ -15509,8 +15617,14 @@ export namespace Prisma {
     fullName?: StringWithAggregatesFilter<"Order"> | string
     email?: StringWithAggregatesFilter<"Order"> | string
     phone?: StringWithAggregatesFilter<"Order"> | string
-    address?: StringWithAggregatesFilter<"Order"> | string
+    address?: StringNullableWithAggregatesFilter<"Order"> | string | null
     comment?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    deliveryType?: StringWithAggregatesFilter<"Order"> | string
+    city?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    postalCode?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    deliveryTime?: StringWithAggregatesFilter<"Order"> | string
+    deliveryHour?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    paymentMethod?: StringWithAggregatesFilter<"Order"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
@@ -16149,8 +16263,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutOrdersInput
@@ -16167,8 +16287,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16182,8 +16308,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutOrdersNestedInput
@@ -16200,8 +16332,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16217,8 +16355,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16232,8 +16376,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16249,8 +16399,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16994,6 +17150,12 @@ export namespace Prisma {
     phone?: SortOrder
     address?: SortOrder
     comment?: SortOrder
+    deliveryType?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    deliveryTime?: SortOrder
+    deliveryHour?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17016,6 +17178,12 @@ export namespace Prisma {
     phone?: SortOrder
     address?: SortOrder
     comment?: SortOrder
+    deliveryType?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    deliveryTime?: SortOrder
+    deliveryHour?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17032,6 +17200,12 @@ export namespace Prisma {
     phone?: SortOrder
     address?: SortOrder
     comment?: SortOrder
+    deliveryType?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    deliveryTime?: SortOrder
+    deliveryHour?: SortOrder
+    paymentMethod?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -18108,8 +18282,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18124,8 +18304,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18214,8 +18400,14 @@ export namespace Prisma {
     fullName?: StringFilter<"Order"> | string
     email?: StringFilter<"Order"> | string
     phone?: StringFilter<"Order"> | string
-    address?: StringFilter<"Order"> | string
+    address?: StringNullableFilter<"Order"> | string | null
     comment?: StringNullableFilter<"Order"> | string | null
+    deliveryType?: StringFilter<"Order"> | string
+    city?: StringNullableFilter<"Order"> | string | null
+    postalCode?: StringNullableFilter<"Order"> | string | null
+    deliveryTime?: StringFilter<"Order"> | string
+    deliveryHour?: StringNullableFilter<"Order"> | string | null
+    paymentMethod?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
   }
@@ -19137,8 +19329,14 @@ export namespace Prisma {
     fullName: string
     email: string
     phone: string
-    address: string
+    address?: string | null
     comment?: string | null
+    deliveryType?: string
+    city?: string | null
+    postalCode?: string | null
+    deliveryTime?: string
+    deliveryHour?: string | null
+    paymentMethod?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19152,8 +19350,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19168,8 +19372,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19184,8 +19394,14 @@ export namespace Prisma {
     fullName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryType?: StringFieldUpdateOperationsInput | string
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryTime?: StringFieldUpdateOperationsInput | string
+    deliveryHour?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethod?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

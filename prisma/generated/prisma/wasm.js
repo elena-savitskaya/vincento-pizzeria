@@ -198,6 +198,12 @@ exports.Prisma.OrderScalarFieldEnum = {
   phone: 'phone',
   address: 'address',
   comment: 'comment',
+  deliveryType: 'deliveryType',
+  city: 'city',
+  postalCode: 'postalCode',
+  deliveryTime: 'deliveryTime',
+  deliveryHour: 'deliveryHour',
+  paymentMethod: 'paymentMethod',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
