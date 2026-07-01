@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 export function toast(type: TypeOptions, children: React.ReactNode) {
   origin(children, {
     type,
-    position: "bottom-right",
+    position: "bottom-left",
   });
 }
 
