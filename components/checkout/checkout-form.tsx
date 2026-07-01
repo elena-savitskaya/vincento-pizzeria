@@ -48,6 +48,7 @@ interface PaymentDetails {
 
 interface CheckoutFormData {
   name: string;
+  email: string;
   phone: string;
   deliveryType: "delivery" | "pickup";
   address?: string;
@@ -71,6 +72,7 @@ export const CheckoutForm = () => {
 
   const [formData, setFormData] = useState<CheckoutFormData>({
     name: "",
+    email: "",
     phone: "+38",
     deliveryType: "delivery",
     deliveryTime: "asap",
@@ -84,6 +86,12 @@ export const CheckoutForm = () => {
 
     if (!formData.name.trim()) {
       newErrors.name = "Ім'я обов'язкове";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email обов'язковий";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Невірний формат email";
     }
 
     if (!formData.phone.trim()) {
@@ -305,6 +313,21 @@ export const CheckoutForm = () => {
           />
           {errors.name && (
             <p className="text-destructive text-sm mt-1">{errors.name}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium mb-2">Email</label>
+          <Input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="your@email.com"
+            className={errors.email ? "border-destructive" : ""}
+          />
+          {errors.email && (
+            <p className="text-destructive text-sm mt-1">{errors.email}</p>
           )}
         </div>
 
