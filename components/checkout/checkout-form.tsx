@@ -10,8 +10,40 @@ import { CheckoutSuccess } from "./checkout-success";
 
 declare global {
   interface Window {
-    PaymentRequest?: any;
+    PaymentRequest?: typeof PaymentRequest;
   }
+}
+
+interface PaymentMethodData {
+  supportedMethods: string;
+  data: {
+    environment: string;
+    apiVersion: number;
+    apiVersionMinor: number;
+    allowedCardNetworks: string[];
+    allowedAuthMethods: string[];
+    merchantInfo: {
+      merchantId?: string;
+      merchantName: string;
+    };
+  };
+}
+
+interface PaymentDetails {
+  total: {
+    label: string;
+    amount: {
+      currency: string;
+      value: string;
+    };
+  };
+  displayItems: Array<{
+    label: string;
+    amount: {
+      currency: string;
+      value: string;
+    };
+  }>;
 }
 
 interface CheckoutFormData {
@@ -140,7 +172,7 @@ export const CheckoutForm = () => {
       return null;
     }
 
-    const paymentMethods = [
+    const paymentMethods: PaymentMethodData[] = [
       {
         supportedMethods: "https://google.com/pay",
         data: {
@@ -157,7 +189,7 @@ export const CheckoutForm = () => {
       },
     ];
 
-    const paymentDetails = {
+    const paymentDetails: PaymentDetails = {
       total: {
         label: "Загальна сума",
         amount: {
@@ -175,13 +207,13 @@ export const CheckoutForm = () => {
     };
 
     try {
-      const paymentRequest = new PaymentRequest(
-        paymentMethods as any,
-        paymentDetails as any
+      const paymentRequest = new (window.PaymentRequest as typeof PaymentRequest)(
+        paymentMethods as unknown as PaymentMethodData[],
+        paymentDetails as unknown as PaymentDetails
       );
 
       const paymentResponse = await paymentRequest.show();
-      const paymentToken = await paymentResponse.complete("success");
+      await paymentResponse.complete("success");
 
       return JSON.stringify({
         method: paymentResponse.methodName,

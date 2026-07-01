@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -121,9 +122,11 @@ model Order {
 
   token String
 
-  totalAmount Int
-  status      OrderStatus
-  paymentId   String?
+  totalAmount   Int
+  status        OrderStatus
+  paymentId     String?
+  paymentStatus String      @default("PENDING")
+  paymentToken  String?
 
   items Json
 
