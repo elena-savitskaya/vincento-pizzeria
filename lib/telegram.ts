@@ -52,69 +52,81 @@ export async function sendOrderNotification(order: OrderNotification) {
 function formatOrderMessage(order: OrderNotification): string {
   const deliveryInfo =
     order.deliveryType === "delivery"
-      ? `📍 <b>Адреса:</b> ${order.address}, ${order.city}\n`
-      : "🏪 <b>Самовивіз</b>\n";
+      ? `📍 <b>Доставка:</b> ${order.address}, ${order.city}`
+      : "🏪 <b>Самовивіз</b>";
 
   const itemsInfo = formatItems(order.items);
 
   return `
-<b>🍕 НОВЕ ЗАМОВЛЕННЯ</b>
+════════════════════════════
+<b>🍕 НОВЕ ЗАМОВЛЕННЯ #${order.id}</b>
+════════════════════════════
 
-<b>#${order.id}</b>
-
-👤 <b>Ім'я:</b> ${order.fullName}
+👤 <b>Клієнт:</b> ${order.fullName}
 📱 <b>Телефон:</b> <code>${order.phone}</code>
+
 ${deliveryInfo}
-📦 <b>Деталі замовлення:</b>
+
+────────────────────────────
+<b>📦 СКЛАД ЗАМОВЛЕННЯ:</b>
+────────────────────────────
 ${itemsInfo}
 
-💰 <b>Сума:</b> ${order.totalAmount} грн
-💳 <b>Спосіб оплати:</b> ${formatPaymentMethod(order.paymentMethod)}
+────────────────────────────
+💰 <b>СУМА:</b> <b>${order.totalAmount}</b> грн
+💳 <b>ОПЛАТА:</b> ${formatPaymentMethod(order.paymentMethod)}
+════════════════════════════
   `.trim();
 }
 
 function formatItems(items: unknown): string {
   if (!items || (Array.isArray(items) && items.length === 0)) {
-    return "Немає товарів";
+    return "❌ Товари не вказані";
   }
+
+  const formatItem = (item: OrderItem): string => {
+    const name = item.name || item.productName || "Товар";
+    let itemText = `🍕 <b>${name}</b>`;
+
+    const specs: string[] = [];
+
+    if (item.pizzaSize) {
+      specs.push(`${item.pizzaSize} см`);
+    }
+
+    if (item.quantity && item.quantity > 1) {
+      specs.push(`x${item.quantity}`);
+    }
+
+    if (specs.length > 0) {
+      itemText += ` <i>(${specs.join(" • ")})</i>`;
+    }
+
+    if (item.price) {
+      itemText += ` — ${item.price} грн`;
+    }
+
+    if (item.ingredients && item.ingredients.length > 0) {
+      const ingredientsList = item.ingredients
+        .map((ing) => `${ing.name}`)
+        .join(", ");
+      itemText += `\n   ➕ Додано: ${ingredientsList}`;
+    }
+
+    return itemText;
+  };
 
   if (typeof items === "string") {
     try {
       const parsed = JSON.parse(items) as OrderItem[];
-      return parsed
-        .map((item) => {
-          let itemText = `• ${item.name} (${item.quantity || 1}x)`;
-
-          if (item.ingredients && item.ingredients.length > 0) {
-            const ingredientsList = item.ingredients
-              .map((ing) => ing.name)
-              .join(", ");
-            itemText += `\n  Додаткові інгрідієнти: ${ingredientsList}`;
-          }
-
-          return itemText;
-        })
-        .join("\n");
+      return parsed.map(formatItem).join("\n\n");
     } catch {
       return items;
     }
   }
 
   if (Array.isArray(items)) {
-    return items
-      .map((item: OrderItem) => {
-        let itemText = `• ${item.name || item.productName} (${item.quantity || 1}x)`;
-
-        if (item.ingredients && item.ingredients.length > 0) {
-          const ingredientsList = item.ingredients
-            .map((ing) => ing.name)
-            .join(", ");
-          itemText += `\n  Додаткові інгрідієнти: ${ingredientsList}`;
-        }
-
-        return itemText;
-      })
-      .join("\n");
+    return items.map((item: OrderItem) => formatItem(item)).join("\n\n");
   }
 
   return "Детальна інформація про товари";
