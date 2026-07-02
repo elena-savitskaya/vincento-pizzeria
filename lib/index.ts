@@ -13,3 +13,4 @@ export type { CartStateItem } from "./cart/get-cart-details";
 export { findOrCreateCart } from "./cart/find-or-create-cart";
 export { updateCartTotalAmount } from "./cart/update-cart-total-amount";
 export { declOfNum } from "./cart/decl-of-num";
+export { validateForm, cleanPhoneNumber, processGooglePay, generateTimeOptions } from "./checkout";
