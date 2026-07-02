@@ -9,13 +9,15 @@ export const metadata: Metadata = {
 
 export default function CheckoutPage() {
   return (
-    <>
-      <Container>
-        <div className="max-w-2xl mx-auto">
-          <Title text="Оформлення замовлення" size="lg" className="font-extrabold mb-8" />
-          <CheckoutForm />
-        </div>
-      </Container>
-    </>
+    <Container>
+      <div className="max-w-2xl mx-auto">
+        <Title
+          text="Оформлення замовлення"
+          size="sm"
+          className="font-extrabold pb-6"
+        />
+        <CheckoutForm />
+      </div>
+    </Container>
   );
 }

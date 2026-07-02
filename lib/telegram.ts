@@ -20,6 +20,9 @@ interface OrderItem {
   productName?: string;
   quantity?: number;
   price?: number;
+  pizzaSize?: number;
+  pizzaType?: number;
+  ingredients?: Array<{ name: string; price: number }>;
 }
 
 export async function sendOrderNotification(order: OrderNotification) {
@@ -62,7 +65,7 @@ function formatOrderMessage(order: OrderNotification): string {
 👤 <b>Ім'я:</b> ${order.fullName}
 📱 <b>Телефон:</b> <code>${order.phone}</code>
 ${deliveryInfo}
-📦 <b>Товари:</b>
+📦 <b>Деталі замовлення:</b>
 ${itemsInfo}
 
 💰 <b>Сума:</b> ${order.totalAmount} грн
@@ -79,10 +82,18 @@ function formatItems(items: unknown): string {
     try {
       const parsed = JSON.parse(items) as OrderItem[];
       return parsed
-        .map(
-          (item) =>
-            `• ${item.name} (${item.quantity || 1}x) - ${(item.price || 0) * (item.quantity || 1)} грн`
-        )
+        .map((item) => {
+          let itemText = `• ${item.name} (${item.quantity || 1}x)`;
+
+          if (item.ingredients && item.ingredients.length > 0) {
+            const ingredientsList = item.ingredients
+              .map((ing) => ing.name)
+              .join(", ");
+            itemText += `\n  Додаткові інгрідієнти: ${ingredientsList}`;
+          }
+
+          return itemText;
+        })
         .join("\n");
     } catch {
       return items;
@@ -91,10 +102,18 @@ function formatItems(items: unknown): string {
 
   if (Array.isArray(items)) {
     return items
-      .map(
-        (item: OrderItem) =>
-          `• ${item.name || item.productName} (${item.quantity || 1}x)`
-      )
+      .map((item: OrderItem) => {
+        let itemText = `• ${item.name || item.productName} (${item.quantity || 1}x)`;
+
+        if (item.ingredients && item.ingredients.length > 0) {
+          const ingredientsList = item.ingredients
+            .map((ing) => ing.name)
+            .join(", ");
+          itemText += `\n  Додаткові: ${ingredientsList}`;
+        }
+
+        return itemText;
+      })
       .join("\n");
   }
 

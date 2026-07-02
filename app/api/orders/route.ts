@@ -46,7 +46,6 @@ export async function POST(req: NextRequest) {
     }
 
     const token = req.cookies.get("cartToken")?.value || crypto.randomUUID();
-    const orderId = `VMP${Date.now()}${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
     let paymentStatus = "PENDING";
     if (paymentMethod === "google-pay" && paymentToken) {
@@ -87,8 +86,7 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({
-      orderId: `${orderId}`,
-      orderNumber: order.id,
+      orderId: order.id,
       message: "Замовлення успішно створено",
     });
   } catch (error) {

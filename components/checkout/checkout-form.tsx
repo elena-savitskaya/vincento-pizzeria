@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCartStore } from "@/store";
-import { toastError, toastSuccess } from "@/lib";
+import { toastError, toastSuccess, getCartItemDetails } from "@/lib";
 import { Loader } from "lucide-react";
 import { CheckoutSuccess } from "./checkout-success";
+import { PizzaSize, PizzaType } from "@/types/pizza";
 
 declare global {
   interface Window {
@@ -96,8 +97,8 @@ export const CheckoutForm = () => {
 
     if (!formData.phone.trim()) {
       newErrors.phone = "Номер телефону обов'язковий";
-    } else if (!/^\+38\(\d{3}\)-\d{3}-\d{2}-\d{2}$/.test(formData.phone)) {
-      newErrors.phone = "Невірний формат номера телефону";
+    } else if (!/^\+38\d{10}$/.test(formData.phone)) {
+      newErrors.phone = "Номер має бути у форматі +38 та 10 цифр";
     }
 
     if (formData.deliveryType === "delivery") {
@@ -124,18 +125,8 @@ export const CheckoutForm = () => {
     const digits = phone.replace(/\D/g, "");
 
     if (!digits) return "+38";
-    if (digits.length === 1) return `+38(0${digits}`;
-    if (digits.length === 2) return `+38(0${digits}`;
-    if (digits.length === 3) return `+38(${digits})`;
-    if (digits.length === 4) return `+38(${digits.slice(0, 3)})-${digits.slice(3)}`;
-    if (digits.length === 5) return `+38(${digits.slice(0, 3)})-${digits.slice(3)}`;
-    if (digits.length === 6) return `+38(${digits.slice(0, 3)})-${digits.slice(3)}`;
-    if (digits.length === 7) return `+38(${digits.slice(0, 3)})-${digits.slice(3, 6)}-${digits.slice(6)}`;
-    if (digits.length === 8) return `+38(${digits.slice(0, 3)})-${digits.slice(3, 6)}-${digits.slice(6)}`;
-    if (digits.length === 9) return `+38(${digits.slice(0, 3)})-${digits.slice(3, 6)}-${digits.slice(6, 8)}-${digits.slice(8)}`;
-    if (digits.length >= 10) return `+38(${digits.slice(0, 3)})-${digits.slice(3, 6)}-${digits.slice(6, 8)}-${digits.slice(8, 10)}`;
-
-    return phone;
+    if (digits.length > 10) return `+38${digits.slice(-10)}`;
+    return `+38${digits}`;
   };
 
   const handleInputChange = (
@@ -355,7 +346,7 @@ export const CheckoutForm = () => {
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
-            placeholder="+38 (0XX) XXX XX XX"
+            placeholder="+380501234567"
             className={errors.phone ? "border-destructive" : ""}
           />
           {errors.phone && (
@@ -542,17 +533,43 @@ export const CheckoutForm = () => {
       </div>
 
       {/* Підсумок замовлення */}
-      <div className="flex flex-col gap-3 p-4 bg-card rounded-lg border border-border">
-        <h2 className="text-lg font-bold">Підсумок</h2>
-        <div className="flex justify-between items-center text-lg">
-          <span>Кількість товарів:</span>
-          <span className="font-bold">
-            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-          </span>
+      <div className="flex flex-col gap-4 p-6 bg-card rounded-lg border border-border">
+        <h2 className="text-xl font-bold">Ваше замовлення</h2>
+        <div className="flex flex-col gap-3">
+          {cartItems.map((item, index) => {
+            const details = getCartItemDetails(
+              item.ingredients,
+              item.pizzaType as PizzaType,
+              item.pizzaSize as PizzaSize
+            );
+            const itemTotalPrice = item.price;
+
+            return (
+              <div key={item.id}>
+                <div className="flex justify-between items-start gap-4">
+                  <div className="flex-1">
+                    <p className="font-semibold text-base">{item.name}</p>
+                    {details && (
+                      <p className="text-xs text-muted-foreground mt-1 whitespace-pre-wrap">
+                        {details}
+                      </p>
+                    )}
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="font-semibold">{itemTotalPrice} грн</p>
+                    <p className="text-sm text-muted-foreground">{item.quantity} шт</p>
+                  </div>
+                </div>
+                {index < cartItems.length - 1 && (
+                  <div className="border-t border-border/50 mt-3" />
+                )}
+              </div>
+            );
+          })}
         </div>
-        <div className="flex justify-between items-center text-xl border-t border-border pt-3">
-          <span className="font-bold">Всього:</span>
-          <span className="font-extrabold text-destructive">{totalAmount} грн</span>
+        <div className="flex justify-between items-center text-lg border-t-2 border-border pt-4 mt-2">
+          <span className="font-bold">Разом:</span>
+          <span className="font-extrabold text-2xl">{totalAmount} грн</span>
         </div>
       </div>
 
