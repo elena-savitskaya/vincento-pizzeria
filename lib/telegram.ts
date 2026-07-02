@@ -66,7 +66,7 @@ function formatOrderMessage(order: OrderNotification): string {
 ${deliveryInfo}
 
 ────────────────────────────
-<b>СКЛАД ЗАМОВЛЕННЯ:</b>
+<b>Деталі замовлення:</b>
 
 ${itemsInfo}
 
@@ -95,11 +95,11 @@ function formatItems(items: unknown): string {
     }
 
     if (specs.length > 0) {
-      itemText += ` <i>(${specs.join(" • ")})</i>`;
+      itemText += `\n   Розмір: <i>(${specs.join(" • ")})</i>`;
     }
 
     if (item.price) {
-      itemText += `-  ${item.price} грн`;
+      itemText += ` - ${item.price} грн`;
     }
 
     if (item.ingredients && item.ingredients.length > 0) {
@@ -115,14 +115,14 @@ function formatItems(items: unknown): string {
   if (typeof items === "string") {
     try {
       const parsed = JSON.parse(items) as OrderItem[];
-      return parsed.map(formatItem).join("\n\n");
+      return parsed.map((item, index) => `${index + 1}. ${formatItem(item)}`).join("\n\n");
     } catch {
       return items;
     }
   }
 
   if (Array.isArray(items)) {
-    return items.map((item: OrderItem) => formatItem(item)).join("\n\n");
+    return items.map((item: OrderItem, index: number) => `${index + 1}. ${formatItem(item)}`).join("\n\n");
   }
 
   return "Детальна інформація про товари";
