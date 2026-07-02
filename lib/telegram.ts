@@ -58,24 +58,20 @@ function formatOrderMessage(order: OrderNotification): string {
   const itemsInfo = formatItems(order.items);
 
   return `
-════════════════════════════
+
 <b>🍕 НОВЕ ЗАМОВЛЕННЯ #${order.id}</b>
-════════════════════════════
 
 👤 <b>Клієнт:</b> ${order.fullName}
 📱 <b>Телефон:</b> <code>${order.phone}</code>
-
 ${deliveryInfo}
 
 ────────────────────────────
-<b>📦 СКЛАД ЗАМОВЛЕННЯ:</b>
-────────────────────────────
+<b>СКЛАД ЗАМОВЛЕННЯ:</b>
+
 ${itemsInfo}
 
-────────────────────────────
 💰 <b>СУМА:</b> <b>${order.totalAmount}</b> грн
 💳 <b>ОПЛАТА:</b> ${formatPaymentMethod(order.paymentMethod)}
-════════════════════════════
   `.trim();
 }
 
@@ -86,7 +82,7 @@ function formatItems(items: unknown): string {
 
   const formatItem = (item: OrderItem): string => {
     const name = item.name || item.productName || "Товар";
-    let itemText = `🍕 <b>${name}</b>`;
+    let itemText = `<b>${name}</b>`;
 
     const specs: string[] = [];
 
@@ -103,7 +99,7 @@ function formatItems(items: unknown): string {
     }
 
     if (item.price) {
-      itemText += ` — ${item.price} грн`;
+      itemText += `-  ${item.price} грн`;
     }
 
     if (item.ingredients && item.ingredients.length > 0) {
