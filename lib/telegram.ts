@@ -109,7 +109,7 @@ function formatItems(items: unknown): string {
           const ingredientsList = item.ingredients
             .map((ing) => ing.name)
             .join(", ");
-          itemText += `\n  Додаткові: ${ingredientsList}`;
+          itemText += `\n  Додаткові інгрідієнти: ${ingredientsList}`;
         }
 
         return itemText;
